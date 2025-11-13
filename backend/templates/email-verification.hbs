@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-M">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background-color: #007bff;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to Hotel Booking!</h2>
+        <p>Hi {{firstName}},</p>
+        <p>Thank you for registering. Please click the button below to verify your email address and activate your account.</p>
+        
+        <a href="{{verificationUrl}}" class="button" style="color: #ffffff;">Verify My Email</a>
+        
+        <p>If you did not sign up for this account, you can safely ignore this email.</p>
+        <p>Thanks,<br>The Hotel Booking Team</p>
+    </div>
+</body>
+</html>

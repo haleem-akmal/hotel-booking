@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Booking Confirmation</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+        .header { background-color: #007bff; color: #ffffff; padding: 20px; text-align: center; }
+        .content { padding: 30px; }
+        .content p { line-height: 1.6; }
+        .booking-details { background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin-top: 20px; }
+        .booking-details th, .booking-details td { padding: 10px 0; text-align: left; }
+        .booking-details th { width: 40%; color: #555; }
+        .footer { padding: 20px; text-align: center; font-size: 12px; color: #888; background-color: #f1f1f1; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Booking Confirmed!</h1>
+        </div>
+        <div class="content">
+            <p>Hi {{userName}},</p>
+            <p>Your booking at <strong>{{hotelName}}</strong> has been successfully confirmed. We look forward to welcoming you!</p>
+
+            <div class="booking-details">
+                <h3>Your Booking Details:</h3>
+                <table style="width: 100%;">
+                    <tr>
+                        <th>Hotel:</th>
+                        <td>{{hotelName}}</td>
+                    </tr>
+                    <tr>
+                        <th>Check-in Date:</th>
+                        <td>{{checkInDate}}</td>
+                    </tr>
+                    <tr>
+                        <th>Check-out Date:</th>
+                        <td>{{checkOutDate}}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Price:</th>
+                        <td><strong>${{totalPrice}}</strong></td>
+                    </tr>
+                </table>
+            </div>
+            
+            <p style="margin-top: 20px;">If you have any questions, feel free to contact us.</p>
+            <p>Thanks,<br>The Hotel Booking Team</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 Hotel Booking Inc. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

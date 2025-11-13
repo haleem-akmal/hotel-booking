@@ -32,4 +32,8 @@ export class UsersService {
     // 1. Mongoose-இன் findOne method-ஐப் பயன்படுத்தவும்
     return this.userModel.findOne({ email: email }).exec();
   }
+  async findOneById(id: string): Promise<UserDocument | null> {
+    // 1. Mongoose-இன் findById method-ஐப் பயன்படுத்தவும்
+    return this.userModel.findById(id).exec();
+  }
 }
