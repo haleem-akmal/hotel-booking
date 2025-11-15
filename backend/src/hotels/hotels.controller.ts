@@ -1,10 +1,10 @@
-import { Controller, Post, Body, UseGuards, Get, Param, Patch, Delete,  UseInterceptors, UploadedFiles, } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get, Param, Patch, Delete,  UseInterceptors, UploadedFiles,Query } from '@nestjs/common';
 import { HotelsService } from './hotels.service';
 import { CreateHotelDto } from './dto/create-hotel.dto'; // 2. Import the DTO for hotel creation
 import { AuthGuard } from '@nestjs/passport'; // 3. Import the authentication guard
 import { UpdateHotelDto } from './dto/update-hotel.dto';
 import { FilesInterceptor } from '@nestjs/platform-express'; // 3. Import FilesInterceptor for handling multiple uploads
-
+import { SearchHotelsDto } from './dto/search-hotels.dto';
 
 @Controller('hotels')
 export class HotelsController {
@@ -28,27 +28,35 @@ export class HotelsController {
   }
 
 
+ /**
+   * GET /hotels (Public)
+   * (findAll method is here...)
+   */
+  @Get()
+  findAll() {
+    // 3. இது '/hotels' route-ஐ மட்டும் கையாளும்
+    return this.hotelsService.findAll();
+  }
+
   /**
- * GET /hotels (Public)
- * Retrieves a list of all hotels
- */
-// 2. Add the 'findAll' endpoint
-@Get()
-findAll() {
-  // 3. No authentication guard applied (public route)
-  return this.hotelsService.findAll();
-}
+   * GET /hotels/search?checkIn=...&checkOut=... (Public)
+   * கிடைக்கும் (Available) hotels-களைத் தேடுகிறது
+   */
+  // 4. 'search' endpoint-ஐச் சேர்க்கவும்
+  @Get('search')
+  searchAvailableHotels(@Query() searchDto: SearchHotelsDto) {
+    // 5. ValidationPipe (main.ts) தானாகவே DTO-வை validate செய்யும்
+    return this.hotelsService.searchAvailableHotels(searchDto);
+  }
 
 /**
- * GET /hotels/:id (Public)
- * Retrieves a specific hotel by its ID
- */
-// 2. Add the 'findOne' endpoint
-@Get(':id') // 3. Define the ':id' route parameter
-findOne(@Param('id') id: string) {
-  // 4. Pass the ID to the service for lookup
-  return this.hotelsService.findOne(id);
-}
+   * GET /hotels/:id (Public)
+   * (findOne method is here...)
+   */
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.hotelsService.findOne(id);
+  }
 
 /**
  * PATCH /hotels/:id (Protected)

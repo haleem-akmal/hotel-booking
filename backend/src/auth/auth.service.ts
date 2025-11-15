@@ -107,8 +107,8 @@ export class AuthService {
     };
   }
 
-  /**
-   * ஒரு user-ஐ login செய்து, JWT-ஐ வழங்குகிறது (Updated)
+ /**
+   * ஒரு user-ஐ login செய்து, JWT-ஐயும் User Data-வையும் வழங்குகிறது (Updated)
    */
   async login(loginDto: LoginDto) {
     const { email, password } = loginDto;
@@ -125,23 +125,29 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    // 3. படி 3: Email verified-ஆ எனச் சோதிக்கவும் (புதியது)
+    // 3. Email verified-ஆ எனச் சோதிக்கவும்
     if (!user.isEmailVerified) {
-      // 4. Email verify ஆகவில்லை என்றால், பிழை அனுப்பவும்
       throw new UnauthorizedException(
         'Email not verified. Please check your inbox.',
       );
     }
 
-    // 5. Email verified ஆக இருந்தால், JWT-ஐ உருவாக்கவும்
+    // 4. JWT Payload-ஐ உருவாக்கவும்
     const payload = {
       sub: user._id,
       email: user.email,
     };
 
-    // 6. Token-ஐ Sign செய்து, திருப்பி அனுப்பவும்
+    // 5. Token-ஐ Sign செய்யவும்
+    const accessToken = this.jwtService.sign(payload);
+
+    // 6. User object-லிருந்து password-ஐ நீக்கவும் (FIXED)
+    const { password: userPassword, ...userInfo } = user.toObject();
+
+    // 7. Token-ஐயும், User Info-வையும் திருப்பி அனுப்பவும் (NEW)
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: accessToken,
+      user: userInfo, // (lastName, email, etc., password இல்லாமல்)
     };
   }
 
