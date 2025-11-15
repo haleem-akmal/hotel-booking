@@ -106,10 +106,6 @@ This project has a strong foundation. Here are the next steps to make it a produ
         * View/Manage all hotels (CRUD).
         * View/Manage all users.
         * View all bookings in the system.
-* **Payment Gateway:**
-    * Integrate **Stripe** (or PayPal) into the `BookingForm`.
-    * Create a `POST /bookings/payment-intent` endpoint on the backend to create a Stripe payment.
-    * Confirm the booking only *after* the payment is successful.
 * **Deployment:**
     * **Backend (Nest.js):** Deploy to a service like **Render**, **Vercel**, or **AWS**.
     * **Frontend (React):** Deploy to **Vercel** or **Netlify**.
